@@ -8,6 +8,8 @@ server.use(express.json());
 // Route params = /users/1
 // Request body = { "name": "Kevin", "email": "kevin@gmail.com"}
 
+let requests = 0;
+
 const projects = [
   {
     id: "1",
@@ -15,6 +17,14 @@ const projects = [
     tasks: []
   }
 ];
+
+server.use((req, res, next) => {
+  requests++;
+
+  console.log(requests);
+
+  next();
+});
 
 function checkProjectInArray(req, res, next) {
   const id = req.params.id;
